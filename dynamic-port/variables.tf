@@ -8,11 +8,12 @@ variable "region" {
 
 variable "amis" {
   default = {
-    ecs = "ami-2b08f44a"
+    ecs = "ami-56bd0030"
     nat = "ami-27d6e626"
   }
 }
 
 variable "key_name" {
-  default = "YOUR_SSH_KEY_PAIR_NAME"
+  # default = "YOUR_SSH_KEY_PAIR_NAME" 
+  default = "terraform"
 }
