@@ -3,7 +3,7 @@
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
   enable_dns_hostnames = true
-  
+
   tags {
     Name = "Terraform VPC"
   }
@@ -131,7 +131,7 @@ resource "aws_instance" "nat" {
   user_data                   = "${file("user_data/nat-setup.sh")}"
 
   tags {
-    Name        = "nat"
+    Name        = "NAT Instance"
     Environment = "Common"
     Role        = "NAT"
   }
