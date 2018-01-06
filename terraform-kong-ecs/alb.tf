@@ -3,6 +3,7 @@ resource "aws_alb" "dev_api" {
 
   subnets = [
     "${aws_subnet.public_1a.id}",
+    "${aws_subnet.public_1c.id}"
   ]
 
   security_groups = [
@@ -29,7 +30,7 @@ resource "aws_alb_target_group" "dev_api" {
 
   health_check {
     interval            = 30
-    path                = "/alive"
+    path                = "/index.html"
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
