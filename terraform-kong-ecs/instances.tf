@@ -16,7 +16,7 @@ resource "aws_launch_configuration" "dev_api" {
 
 ### Auto Scaling Group
 resource "aws_autoscaling_group" "dev_api" {
-  availability_zones        = ["ap-northeast-1a"]
+  availability_zones        = ["ap-northeast-1a", "ap-northeast-1c"]
   name                      = "dev-api"
   max_size                  = 2
   min_size                  = 2
@@ -40,7 +40,7 @@ resource "aws_autoscaling_group" "dev_api" {
 
   tag = {
     key                 = "Name"
-    value               = "dev-api-asg"
+    value               = "ECS Instance"
     propagate_at_launch = true
   }
 
