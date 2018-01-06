@@ -31,6 +31,17 @@ resource "aws_subnet" "public_1a" {
   }
 }
 
+resource "aws_subnet" "public_1c" {
+  vpc_id                  = "${aws_vpc.vpc.id}"
+  cidr_block              = "10.0.11.0/24"
+  availability_zone       = "ap-northeast-1c"
+  map_public_ip_on_launch = "1"
+
+  tags {
+    Name = "public-1c"
+  }
+}
+
 # Private Subnets
 
 resource "aws_subnet" "private_1a" {
@@ -41,6 +52,17 @@ resource "aws_subnet" "private_1a" {
 
   tags {
     Name = "private-1a"
+  }
+}
+
+resource "aws_subnet" "private_1c" {
+  vpc_id                  = "${aws_vpc.vpc.id}"
+  cidr_block              = "10.0.101.0/24"
+  availability_zone       = "ap-northeast-1c"
+  map_public_ip_on_launch = "0"
+
+  tags {
+    Name = "private-1c"
   }
 }
 
@@ -79,10 +101,20 @@ resource "aws_route_table_association" "public_1a" {
   route_table_id = "${aws_route_table.public_rt.id}"
 }
 
+resource "aws_route_table_association" "public_1c" {
+  subnet_id      = "${aws_subnet.public_1c.id}"
+  route_table_id = "${aws_route_table.public_rt.id}"
+}
+
 # Private Subnet Association
 
 resource "aws_route_table_association" "private_1a" {
   subnet_id      = "${aws_subnet.private_1a.id}"
+  route_table_id = "${aws_route_table.nat_rt.id}"
+}
+
+resource "aws_route_table_association" "private_1c" {
+  subnet_id      = "${aws_subnet.private_1c.id}"
   route_table_id = "${aws_route_table.nat_rt.id}"
 }
 
@@ -95,6 +127,7 @@ resource "aws_instance" "nat" {
   subnet_id                   = "${aws_subnet.public_1a.id}"
   associate_public_ip_address = true
   source_dest_check           = false
+  user_data                   = "${file("user_data/nat-setup.sh")}"
 
   tags {
     Name        = "nat"
