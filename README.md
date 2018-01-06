@@ -10,7 +10,7 @@ Terraform でAWS（ALB～ECS～RDS）環境構築します。
 
 # このハンズオンで体験できること
 
- * __STEP ①：__ Terraform でAWS（ALB~ECS~RDS）環境構築
+ * __STEP ①：__ Terraform でAWS（ALB～ECS～RDS）環境構築
  * __STEP ②：__ DockerがインストールされたEC2 インスタンス上（＠NATインスタンス）にて、いろいろなコンテナをpullして動かしてみる
  * __STEP ③：__ Apache Bench で負荷をかけるとコンテナがオートスケーリングする
  * __STEP ④：__ ２台の内１台が削除されると自動的に１台新規追加される（オートヒーリング）
