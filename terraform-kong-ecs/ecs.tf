@@ -13,7 +13,7 @@ resource "aws_ecs_service" "api_service" {
 
   load_balancer {
     target_group_arn = "${aws_alb_target_group.dev_api.arn}"
-    container_name   = "nginx"
+    container_name   = "custom-nginx-php-fpm"
     container_port   = 80
   }
 }
