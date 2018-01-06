@@ -7,7 +7,7 @@ resource "aws_launch_configuration" "dev_api" {
   key_name                    = "${var.key_name}"
   security_groups             = ["${aws_security_group.internal.id}"]
   associate_public_ip_address = 0
-  user_data                   = "${file("user_data/api-ecs.sh")}"
+  user_data                   = "${file("user_data/nginx-ecs.sh")}"
 
   lifecycle {
     create_before_destroy = true
@@ -18,11 +18,11 @@ resource "aws_launch_configuration" "dev_api" {
 resource "aws_autoscaling_group" "dev_api" {
   availability_zones        = ["ap-northeast-1a"]
   name                      = "dev-api"
-  max_size                  = 4
-  min_size                  = 1
+  max_size                  = 2
+  min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "EC2"
-  desired_capacity          = 1
+  desired_capacity          = 2
   force_delete              = true
   launch_configuration      = "${aws_launch_configuration.dev_api.id}"
   vpc_zone_identifier       = ["${aws_subnet.private_1a.id}"]
