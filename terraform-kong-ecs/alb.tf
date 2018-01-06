@@ -30,7 +30,7 @@ resource "aws_alb_target_group" "dev_api" {
 
   health_check {
     interval            = 30
-    path                = "/index.html"
+    path                = "/index.php"
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
