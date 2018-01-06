@@ -1,8 +1,5 @@
 # 概要
-Terraform でAWS（ALB~ECS~RDS）環境構築します。
-
-
-Terraform でAWS（ALB~ECS~RDS）環境構築します。
+Terraform でAWS（ALB～ECS～RDS）環境構築します。
  * 「[ECS（Elastic Container Service）](https://aws.amazon.com/jp/ecs/)」
  * 「[オートスケーリング＆ヒーリング](https://aws.amazon.com/jp/autoscaling/)」
  * 「[Docker](https://www.docker.com/)」
