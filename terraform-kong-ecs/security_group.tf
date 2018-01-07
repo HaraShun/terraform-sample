@@ -17,6 +17,14 @@ resource "aws_security_group" "internal" {
     security_groups = ["${aws_security_group.nat.id}"]
   }
 
+# for Kong admin port
+  ingress {
+    from_port = 8001
+    to_port   = 8001
+    protocol  = "tcp"
+    security_groups = ["${aws_security_group.nat.id}"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -44,6 +52,14 @@ resource "aws_security_group" "nat" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+# for c3vis
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -120,6 +136,14 @@ resource "aws_security_group" "http" {
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+# for Kong
+  ingress {
+    from_port   = 8000
+    to_port     = 8000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
