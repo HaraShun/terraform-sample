@@ -1,0 +1,16 @@
+[
+    {
+      "name": "kong",
+      "image": "kong",
+      "cpu": 10,
+      "memory": 200,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 0
+        }
+      ]
+    }
+  ]
+  
