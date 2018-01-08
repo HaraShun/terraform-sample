@@ -5,7 +5,7 @@ resource "aws_launch_configuration" "dev_api" {
   instance_type               = "t2.micro"
   iam_instance_profile        = "${aws_iam_instance_profile.ecs.id}"
   key_name                    = "${var.key_name}"
-  security_groups             = ["${aws_security_group.internal.id}"]
+  security_groups             = ["${aws_security_group.ecs.id}"]
   associate_public_ip_address = 0
   user_data                   = "${file("user_data/nginx-ecs.sh")}"
 
@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "dev_api" {
   desired_capacity          = 2
   force_delete              = true
   launch_configuration      = "${aws_launch_configuration.dev_api.id}"
-  vpc_zone_identifier       = ["${aws_subnet.private_1a.id}"]
+  vpc_zone_identifier       = ["${aws_subnet.private_1a.id}", "${aws_subnet.private_1c.id}"]
 
   enabled_metrics = [
     "GroupMinSize",
