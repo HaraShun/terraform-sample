@@ -1,13 +1,20 @@
-resource "aws_security_group" "internal" {
+resource "aws_security_group" "ecs" {
   vpc_id      = "${aws_vpc.vpc.id}"
-  name        = "internal"
-  description = "Allow internal traffic"
+  name        = "ecs"
+  description = "Allow ecs traffic"
 
   ingress {
     from_port = 0
     to_port   = 65535
     protocol  = "tcp"
     self      = true
+  }
+
+  ingress {
+    from_port = 0
+    to_port   = 65535
+    protocol  = "tcp"
+    security_groups = ["${aws_security_group.alb.id}"]
   }
 
   ingress {
@@ -19,7 +26,7 @@ resource "aws_security_group" "internal" {
 
 # for Kong admin port
   ingress {
-    from_port = 8001
+    from_port = 8000
     to_port   = 8001
     protocol  = "tcp"
     security_groups = ["${aws_security_group.nat.id}"]
@@ -33,7 +40,7 @@ resource "aws_security_group" "internal" {
   }
 
   tags {
-    Name = "internal"
+    Name = "ecs"
   }
 }
 
@@ -104,31 +111,7 @@ resource "aws_security_group" "nat" {
   }
 }
 
-resource "aws_security_group" "ssh" {
-  vpc_id      = "${aws_vpc.vpc.id}"
-  name        = "ssh"
-  description = "Allow ssh inbound traffic"
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["122.212.216.66/32"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags {
-    Name = "ssh"
-  }
-}
-
-resource "aws_security_group" "http" {
+resource "aws_security_group" "alb" {
   vpc_id      = "${aws_vpc.vpc.id}"
   name        = "http"
   description = "Allow http inbound traffic"
@@ -143,7 +126,7 @@ resource "aws_security_group" "http" {
 # for Kong
   ingress {
     from_port   = 8000
-    to_port     = 8000
+    to_port     = 8001
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -156,6 +139,6 @@ resource "aws_security_group" "http" {
   }
 
   tags {
-    Name = "http"
+    Name = "alb"
   }
 }
