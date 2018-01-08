@@ -6,10 +6,7 @@ resource "aws_alb" "dev_api" {
     "${aws_subnet.public_1c.id}"
   ]
 
-  security_groups = [
-    "${aws_security_group.internal.id}",
-    "${aws_security_group.http.id}",
-  ]
+  security_groups = ["${aws_security_group.alb.id}"]
 
   internal                   = false
   enable_deletion_protection = false
@@ -68,7 +65,7 @@ resource "aws_alb_target_group" "kong_api" {
 
   health_check {
     interval            = 30
-    path                = "/"
+    path                = "/mockbin"
     protocol            = "HTTP"
     timeout             = 5
     healthy_threshold   = 2
