@@ -91,3 +91,19 @@ resource "aws_alb_listener" "kong_api" {
     type             = "forward"
   }
 }
+
+##########
+# Output
+##########
+
+output "alb_id" {
+  value = "${aws_alb.dev_api.id}"
+}
+
+output "alb_dns_name" {
+  value = "${aws_alb.dev_api.dns_name}"
+}
+
+output "alb_zone_id" {
+  value = "${aws_alb.dev_api.zone_id}"
+}
