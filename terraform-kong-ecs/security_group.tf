@@ -1,3 +1,7 @@
+##########
+# ECS SG
+##########
+
 resource "aws_security_group" "ecs" {
   vpc_id      = "${aws_vpc.vpc.id}"
   name        = "ecs"
@@ -32,6 +36,15 @@ resource "aws_security_group" "ecs" {
     security_groups = ["${aws_security_group.nat.id}"]
   }
 
+# for Prometheus
+  ingress {
+    from_port = 9100
+    to_port   = 9100
+    protocol  = "tcp"
+    security_groups = ["${aws_security_group.nat.id}"]
+  }
+
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -44,6 +57,10 @@ resource "aws_security_group" "ecs" {
   }
 }
 
+
+#########
+# NAT SG
+#########
 resource "aws_security_group" "nat" {
   vpc_id      = "${aws_vpc.vpc.id}"
   name        = "nat"
@@ -99,6 +116,14 @@ resource "aws_security_group" "nat" {
     cidr_blocks = ["${aws_vpc.vpc.cidr_block}"]
   }
 
+# for Prometheus
+  ingress {
+    from_port   = 9090
+    to_port     = 9090
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -111,9 +136,13 @@ resource "aws_security_group" "nat" {
   }
 }
 
+
+##########
+# ALB SG
+##########
 resource "aws_security_group" "alb" {
   vpc_id      = "${aws_vpc.vpc.id}"
-  name        = "http"
+  name        = "alb"
   description = "Allow http inbound traffic"
 
   ingress {
