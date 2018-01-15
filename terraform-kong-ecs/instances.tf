@@ -79,36 +79,36 @@ resource "aws_autoscaling_policy" "scale_in" {
 }
 
 ### EC2 AutoScaling Alarm
-resource "aws_cloudwatch_metric_alarm" "dev_api_cluster_high" {
-  alarm_name          = "dev-api-cluster-CPU-Utilization-High-30"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "1"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/ECS"
-  period              = "300"
-  statistic           = "Average"
-  threshold           = "30"
+# resource "aws_cloudwatch_metric_alarm" "dev_api_cluster_high" {
+#   alarm_name          = "dev-api-cluster-CPU-Utilization-High-30"
+#   comparison_operator = "GreaterThanOrEqualToThreshold"
+#   evaluation_periods  = "1"
+#   metric_name         = "CPUUtilization"
+#   namespace           = "AWS/ECS"
+#   period              = "300"
+#   statistic           = "Average"
+#   threshold           = "30"
 
-  dimensions {
-    ClusterName = "${aws_ecs_cluster.api_cluster.name}"
-  }
+#   dimensions {
+#     ClusterName = "${aws_ecs_cluster.api_cluster.name}"
+#   }
 
-  alarm_actions = ["${aws_autoscaling_policy.scale_out.arn}"]
-}
+#   alarm_actions = ["${aws_autoscaling_policy.scale_out.arn}"]
+# }
 
-resource "aws_cloudwatch_metric_alarm" "dev_api_cluster_low" {
-  alarm_name          = "dev-api-cluster-CPU-Utilization-Low-5"
-  comparison_operator = "LessThanThreshold"
-  evaluation_periods  = "1"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/ECS"
-  period              = "300"
-  statistic           = "Average"
-  threshold           = "5"
+# resource "aws_cloudwatch_metric_alarm" "dev_api_cluster_low" {
+#   alarm_name          = "dev-api-cluster-CPU-Utilization-Low-5"
+#   comparison_operator = "LessThanThreshold"
+#   evaluation_periods  = "1"
+#   metric_name         = "CPUUtilization"
+#   namespace           = "AWS/ECS"
+#   period              = "300"
+#   statistic           = "Average"
+#   threshold           = "5"
 
-  dimensions {
-    ClusterName = "${aws_ecs_cluster.api_cluster.name}"
-  }
+#   dimensions {
+#     ClusterName = "${aws_ecs_cluster.api_cluster.name}"
+#   }
 
-  alarm_actions = ["${aws_autoscaling_policy.scale_in.arn}"]
-}
+#   alarm_actions = ["${aws_autoscaling_policy.scale_in.arn}"]
+# }
