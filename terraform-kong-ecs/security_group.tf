@@ -73,6 +73,7 @@ resource "aws_security_group" "nat" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+# for Swagegr Docker container
   ingress {
     from_port   = 80
     to_port     = 80
@@ -88,6 +89,7 @@ resource "aws_security_group" "nat" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+# for Kong Docker container
   ingress {
     from_port   = 8000
     to_port     = 8000
@@ -95,9 +97,18 @@ resource "aws_security_group" "nat" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+# for Apache Docker container
   ingress {
     from_port   = 8080
     to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+# for Nginx Docker container
+  ingress {
+    from_port   = 9000
+    to_port     = 9000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
