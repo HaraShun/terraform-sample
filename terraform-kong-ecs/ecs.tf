@@ -2,9 +2,9 @@ resource "aws_ecs_cluster" "api_cluster" {
   name = "api-cluster"
 }
 
-##############################
-# ECS Service for custom php
-############################## 
+################################
+# ECS Service for custom php ★
+################################
 
 # resource "aws_ecs_service" "api_service" {
 #   name                               = "api-service"
@@ -23,9 +23,9 @@ resource "aws_ecs_cluster" "api_cluster" {
 # }
 
 
-####################### 
-# ECS Service for kong
-#######################
+#########################
+# ECS Service for kong ★
+#########################
 
 # resource "aws_ecs_service" "kong-api_service" {
 #   name                               = "kong-api-service"
@@ -43,22 +43,22 @@ resource "aws_ecs_cluster" "api_cluster" {
 #   }
 # }
 
-### ECS Task Definition for custom php
+### ECS Task Definition for custom kong
 resource "aws_ecs_task_definition" "kong-api" {
   family                = "kong-api"
   container_definitions = "${file("task-definitions/kong.json")}"
 }
 
-### ECS Task Definition for custom kong
+### ECS Task Definition for custom php
 resource "aws_ecs_task_definition" "api" {
   family                = "api"
   container_definitions = "${file("task-definitions/api.json")}"
 }
 
 
-########################
-# ECS AutoScaling Alarm
-########################
+##########################
+# ECS AutoScaling Alarm ★
+##########################
 
 # resource "aws_cloudwatch_metric_alarm" "dev_api_service_high" {
 #   alarm_name          = "dev-api-service-CPU-Utilization-High-30"
@@ -97,9 +97,9 @@ resource "aws_ecs_task_definition" "api" {
 # }
 
 
-#############################
-# ECS App AutoScaling Policy
-#############################
+###############################
+# ECS App AutoScaling Policy ★
+###############################
 
 # resource "aws_appautoscaling_target" "target" {
 #   service_namespace  = "ecs"
