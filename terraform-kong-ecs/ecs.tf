@@ -1,3 +1,6 @@
+################################
+# ECS Cluster
+################################
 resource "aws_ecs_cluster" "api_cluster" {
   name = "api-cluster"
 }
@@ -44,16 +47,16 @@ resource "aws_ecs_cluster" "api_cluster" {
 # }
 
 ### ECS Task Definition for custom kong
-resource "aws_ecs_task_definition" "kong-api" {
-  family                = "kong-api"
-  container_definitions = "${file("task-definitions/kong.json")}"
-}
+# resource "aws_ecs_task_definition" "kong-api" {
+#   family                = "kong-api"
+#   container_definitions = "${file("task-definitions/kong.json")}"
+# }
 
-### ECS Task Definition for custom php
-resource "aws_ecs_task_definition" "api" {
-  family                = "api"
-  container_definitions = "${file("task-definitions/api.json")}"
-}
+# ### ECS Task Definition for custom php
+# resource "aws_ecs_task_definition" "api" {
+#   family                = "api"
+#   container_definitions = "${file("task-definitions/api.json")}"
+# }
 
 
 ##########################
