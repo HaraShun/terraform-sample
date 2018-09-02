@@ -8,8 +8,8 @@ variable "region" {
 
 variable "amis" {
   default = {
-    ecs = "ami-56bd0030"
-    nat = "ami-27d6e626"
+    ecs = "ami-0041c416aa23033a2"
+    nat = "ami-0cf78ae724f63bac0"
   }
 }
 
