@@ -1,4 +1,9 @@
+# terraform handson sample
+
 [![Terraform version](https://img.shields.io/badge/terraform-v0.11.8-6600cc.svg?style=popout)](https://www.terraform.io/downloads.html)
+![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg)
+
 
 # 概要
 Terraform でAWS（ALB～ECS～RDS）環境構築します。
