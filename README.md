@@ -1,3 +1,5 @@
+https://img.shields.io/badge/terraform-v0.11.8-6600cc.svg?style=popout
+
 # 概要
 Terraform でAWS（ALB～ECS～RDS）環境構築します。
  * 「[ECS（Elastic Container Service）](https://aws.amazon.com/jp/ecs/)」
