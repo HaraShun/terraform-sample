@@ -1,4 +1,4 @@
-# terraform handson sample
+# Terraform Handson Sample
 
 [![Terraform version](https://img.shields.io/badge/terraform-v0.11.8-6600cc.svg?style=popout)](https://www.terraform.io/downloads.html)
 ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
