@@ -1,4 +1,4 @@
-https://img.shields.io/badge/terraform-v0.11.8-6600cc.svg?style=popout
+[![Terraform version](https://img.shields.io/badge/terraform-v0.11.8-6600cc.svg?style=popout)](https://www.terraform.io/downloads.html)
 
 # 概要
 Terraform でAWS（ALB～ECS～RDS）環境構築します。
